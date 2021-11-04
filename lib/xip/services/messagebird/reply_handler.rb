@@ -4,6 +4,8 @@ module Xip
     module Messagebird
       class ReplyHandler < Xip::Services::BaseReplyHandler
 
+        NUMBERS = ('1'..'100').to_a.freeze
+
         attr_reader :recipient_id, :reply
 
         def initialize(recipient_id: nil, reply: nil)
@@ -33,7 +35,7 @@ module Xip
                 translated_reply,
                 I18n.t(
                   "xip.messagebird.number_option",
-                  number: i + 1,
+                  number: "#{NUMBERS[i]}",
                   suggestion: suggestion,
                   default: "%{number} for %{suggestion}"
                 )
